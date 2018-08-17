@@ -52,7 +52,7 @@ MANPAGES_MD = $(wildcard docs/*.md)
 
 BTRFS_BUILD_TAG = $(shell hack/btrfs_tag.sh)
 LIBDM_BUILD_TAG = $(shell hack/libdm_tag.sh)
-LOCAL_BUILD_TAGS = $(BTRFS_BUILD_TAG) $(LIBDM_BUILD_TAG) $(DARWIN_BUILD_TAG)
+LOCAL_BUILD_TAGS = $(BTRFS_BUILD_TAG) $(LIBDM_BUILD_TAG) $(DARWIN_BUILD_TAG) containers_image_include_torrent
 BUILDTAGS += $(LOCAL_BUILD_TAGS)
 
 DOCKER_BUILD_IMAGE := skopeobuildimage
@@ -146,4 +146,4 @@ test-unit-local:
 	$(GPGME_ENV) $(GO) test -tags "$(BUILDTAGS)" $$($(GO) list -tags "$(BUILDTAGS)" -e ./... | grep -v '^github\.com/containers/skopeo/\(integration\|vendor/.*\)$$')
 
 vendor: vendor.conf
-	vndr -whitelist '^github.com/containers/image/docs/.*'
+	vndr -whitelist '^github.com/anacrolix/.*' -whitelist '^github.com/containers/image/docs/.*'

@@ -76,6 +76,7 @@ func createApp() *cli.App {
 		layersCmd,
 		deleteCmd,
 		manifestDigestCmd,
+		seedCmd,
 		standaloneSignCmd,
 		standaloneVerifyCmd,
 		untrustedSignatureDumpCmd,

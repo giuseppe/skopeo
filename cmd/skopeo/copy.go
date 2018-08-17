@@ -59,6 +59,12 @@ func copyHandler(c *cli.Context) error {
 	if err != nil {
 		return err
 	}
+	if c.IsSet("try-torrent") {
+		sourceCtx.DockerTryTorrent = true
+	}
+	if c.IsSet("torrent-trackers") {
+		sourceCtx.DockerTorrentTrackers = c.StringSlice("torrent-trackers")
+	}
 
 	var manifestType string
 	if c.IsSet("format") {
@@ -190,6 +196,14 @@ var copyCmd = cli.Command{
 			Name:  "dest-daemon-host",
 			Value: "",
 			Usage: "use docker daemon host at `HOST` (docker-daemon destinations only)",
+		},
+		cli.BoolFlag{
+			Name:   "try-torrent",
+			Usage:  "attempt to pull layers using BitTorrent",
+		},
+		cli.StringSliceFlag{
+			Name:  "torrent-trackers",
+			Usage: "additional trackers for BitTorrent",
 		},
 	},
 }
